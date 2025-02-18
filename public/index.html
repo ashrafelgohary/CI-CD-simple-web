@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    function sayHello() {
+      fetch('/hello')
+        .then(response => response.text())
+        .then(data => {
+          // Set the modal message and display the modal
+          document.getElementById('modal-message').textContent = data;
+          document.getElementById('modal').style.display = 'block';
+        })
+        .catch(err => console.error(err));
+    }
+    
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+    
+    // Optional: Close modal when clicking outside the modal content
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Simple Web App</h1>
+    <button onclick="sayHello()">Click Me</button>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p id="modal-message"></p>
+    </div>
+  </div>
+</body>
+</html>
